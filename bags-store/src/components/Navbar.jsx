@@ -1,47 +1,66 @@
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { FiMenu, FiX } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
-import { openWhatsAppGeneral } from "../services/whatsappService";
-import "../styles/navbar.css";
+import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
+function Navbar() {
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="navbar">
-      <div className="navbar__inner">
-        <div className="navbar__logo" onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
-          👜 <span>LuxBag</span>Store
-        </div>
-
-        <ul className="navbar__links">
-          <li><NavLink to="/">Home</NavLink></li>
-          <li><NavLink to="/categories">Categories</NavLink></li>
-          <li><NavLink to="/search">Search</NavLink></li>
-        </ul>
-
-        <div className="navbar__actions">
-          <button className="navbar__wa-btn" onClick={openWhatsAppGeneral}>
-            <FaWhatsapp /> WhatsApp
-          </button>
-          <button className="navbar__hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-          </button>
-        </div>
+    <nav style={styles.navbar}>
+      {/* LOGO */}
+      <div style={styles.logo}>
+        Auto<span style={{ color: "#ff3c00" }}>Xpress</span>
       </div>
 
-      <div className={`navbar__mobile-menu ${menuOpen ? "open" : ""}`}>
-        <NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink>
-        <NavLink to="/categories" onClick={() => setMenuOpen(false)}>Categories</NavLink>
-        <NavLink to="/search" onClick={() => setMenuOpen(false)}>Search</NavLink>
-        <button className="navbar__wa-btn" style={{ width: "fit-content" }} onClick={() => { openWhatsAppGeneral(); setMenuOpen(false); }}>
-          <FaWhatsapp /> Chat on WhatsApp
-        </button>
+      {/* ONLY HOME LINK */}
+      <div style={styles.links}>
+        <Link
+          to="/"
+          style={{
+            ...styles.link,
+            color: isActive("/") ? "#ff3c00" : "#fff",
+          }}
+        >
+          Home
+        </Link>
       </div>
     </nav>
   );
+}
+
+const styles = {
+  navbar: {
+    width: "100%",
+    background: "#111",
+    color: "#fff",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "15px 40px",
+    position: "sticky",
+    top: 0,
+    zIndex: 1000,
+    boxSizing: "border-box",
+  },
+
+  logo: {
+    fontSize: "28px",
+    fontWeight: "bold",
+    cursor: "pointer",
+  },
+
+  links: {
+    display: "flex",
+    gap: "25px",
+    alignItems: "center",
+  },
+
+  link: {
+    textDecoration: "none",
+    fontSize: "17px",
+    fontWeight: "500",
+    transition: "0.3s",
+  },
 };
 
 export default Navbar;

@@ -1,45 +1,28 @@
 import { useNavigate } from "react-router-dom";
-import { FaWhatsapp } from "react-icons/fa";
-import { formatPrice } from "../utils/formatPrice";
-import { openWhatsApp } from "../services/whatsappService";
-import "../styles/product.css";
 
-const ProductCard = ({ product }) => {
-  const navigate = useNavigate();
-  const mainImg = product.images?.[0];
+function ProductCard({ product }) {
+  const nav = useNavigate();
 
-  const handleOrder = (e) => {
-    e.stopPropagation();
-    openWhatsApp(product);
+  const orderNow = () => {
+    window.open(
+      `https://wa.me/254700000000?text=Hi, I want to order ${product.name} No ${product.number} Price ${product.price}`,
+      "_blank"
+    );
   };
 
   return (
-    <div className="product-card" onClick={() => navigate(`/product/${product.id}`)}>
-      <div className="product-card__img-wrap">
-        {mainImg ? (
-          <img src={mainImg} alt={product.name} loading="lazy" />
-        ) : (
-          <div className="product-card__placeholder">👜</div>
-        )}
-        {product.inStock === false && (
-          <span className="product-card__badge" style={{ background: "#ef4444" }}>Out of Stock</span>
-        )}
-        {product.inStock !== false && (
-          <span className="product-card__badge">New</span>
-        )}
-      </div>
-      <div className="product-card__body">
-        <div className="product-card__cat">{product.category}</div>
-        <div className="product-card__name">{product.name}</div>
-        <div className="product-card__footer">
-          <span className="product-card__price">{formatPrice(product.price)}</span>
-          <button className="product-card__wa-btn" onClick={handleOrder}>
-            <FaWhatsapp /> Order
-          </button>
-        </div>
-      </div>
+    <div className="card">
+      <img src={product.image} alt="" />
+      <h3>{product.name} #{product.number}</h3>
+      <p>Ksh {product.price}</p>
+
+      <button onClick={orderNow}>Order</button>
+
+      <button onClick={() => nav(`/product/${product.id}`)}>
+        View Full Details
+      </button>
     </div>
   );
-};
+}
 
 export default ProductCard;

@@ -1,29 +1,33 @@
-import { BrowserRouter } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import { AuthProvider } from "./context/AuthContext";
-import AppRoutes from "./routes/AppRoutes";
-import "./styles/global.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const App = () => (
-  <BrowserRouter>
-    <AuthProvider>
-      <AppRoutes />
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 3500,
-          style: {
-            fontFamily: "'Poppins', sans-serif",
-            fontSize: "0.875rem",
-            borderRadius: "10px",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.12)",
-          },
-          success: { iconTheme: { primary: "#10b981", secondary: "#fff" } },
-          error: { iconTheme: { primary: "#ef4444", secondary: "#fff" } },
-        }}
-      />
-    </AuthProvider>
-  </BrowserRouter>
-);
+import Home from "./pages/Home";
+import ProductDetails from "./pages/ProductDetails";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import Navbar from "./components/Navbar";
+
+import Footer from "./components/Footer";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+        <Navbar />  
+        <div style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+          </Routes>
+        </div>
+
+        {/* ✅ FOOTER NOW ALWAYS SHOWS */}
+        <Footer />
+
+      </div>
+    </BrowserRouter>
+  );
+}
 
 export default App;
