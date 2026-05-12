@@ -35,3 +35,137 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* =========================
+   PAGE
+========================= */
+
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #111, #1f1f1f);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.login-card {
+  width: 950px;
+  max-width: 100%;
+  min-height: 550px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================
+   LEFT
+========================= */
+
+.login-left {
+  flex: 1;
+  background: #111;
+  color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-left h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.login-left p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+.login-left img {
+  width: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+/* =========================
+   RIGHT
+========================= */
+
+.login-right {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-right h2 {
+  font-size: 34px;
+  margin-bottom: 30px;
+  color: #111;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.login-right input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+}
+
+.login-right input:focus {
+  border: 1px solid #ff3c00;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.login-right button {
+  padding: 15px;
+  background: #ff3c00;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-right button:hover {
+  background: #e23600;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .login-card {
+    flex-direction: column;
+  }
+
+  .login-left {
+    display: none;
+  }
+
+  .login-right {
+    padding: 30px;
+  }
+}

@@ -37,7 +37,9 @@ function AdminDashboard() {
 
   const fetchProducts = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, "products"));
+      const querySnapshot = await getDocs(
+        collection(db, "products")
+      );
 
       const items = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -65,11 +67,13 @@ function AdminDashboard() {
 
       data.append(
         "upload_preset",
-        import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+        import.meta.env
+          .VITE_CLOUDINARY_UPLOAD_PRESET
       );
 
       const res = await axios.post(
-        import.meta.env.VITE_CLOUDINARY_UPLOAD_URL,
+        import.meta.env
+          .VITE_CLOUDINARY_UPLOAD_URL,
         data
       );
 
@@ -91,7 +95,11 @@ function AdminDashboard() {
   // ADD OR UPDATE PRODUCT
   // =========================
   const addProduct = async () => {
-    if (!form.name || !form.price || !form.image) {
+    if (
+      !form.name ||
+      !form.price ||
+      !form.image
+    ) {
       alert("Please fill all required fields");
       return;
     }
@@ -99,23 +107,32 @@ function AdminDashboard() {
     try {
       // UPDATE PRODUCT
       if (editingId) {
-        await updateDoc(doc(db, "products", editingId), {
-          ...form,
-          price: Number(form.price),
-        });
+        await updateDoc(
+          doc(db, "products", editingId),
+          {
+            ...form,
+            price: Number(form.price),
+          }
+        );
 
-        alert("Product updated successfully!");
+        alert("Product updated!");
+
         setEditingId(null);
       }
 
       // ADD PRODUCT
       else {
-        await addDoc(collection(db, "products"), {
-          ...form,
-          price: Number(form.price),
-        });
+        await addDoc(
+          collection(db, "products"),
+          {
+            ...form,
+            price: Number(form.price),
+            sold: false,
+            offer: false,
+          }
+        );
 
-        alert("Product added successfully!");
+        alert("Product added!");
       }
 
       // RESET FORM
@@ -127,7 +144,7 @@ function AdminDashboard() {
         description: "",
       });
 
-      // REFRESH PRODUCTS
+      // REFRESH
       fetchProducts();
     } catch (err) {
       console.log("Firestore error:", err);
@@ -139,16 +156,19 @@ function AdminDashboard() {
   // DELETE PRODUCT
   // =========================
   const deleteProduct = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this product?"
-    );
+    const confirmDelete =
+      window.confirm(
+        "Are you sure you want to delete this product?"
+      );
 
     if (!confirmDelete) return;
 
     try {
-      await deleteDoc(doc(db, "products", id));
+      await deleteDoc(
+        doc(db, "products", id)
+      );
 
-      alert("Product deleted successfully!");
+      alert("Product deleted!");
 
       fetchProducts();
     } catch (err) {
@@ -157,7 +177,7 @@ function AdminDashboard() {
   };
 
   // =========================
-  // START EDITING
+  // EDIT PRODUCT
   // =========================
   const startEdit = (product) => {
     setForm({
@@ -165,7 +185,8 @@ function AdminDashboard() {
       price: product.price || "",
       number: product.number || "",
       image: product.image || "",
-      description: product.description || "",
+      description:
+        product.description || "",
     });
 
     setEditingId(product.id);
@@ -177,34 +198,79 @@ function AdminDashboard() {
   };
 
   // =========================
+  // TOGGLE SOLD
+  // =========================
+  const toggleSold = async (item) => {
+    try {
+      await updateDoc(
+        doc(db, "products", item.id),
+        {
+          sold: !item.sold,
+        }
+      );
+
+      fetchProducts();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // =========================
+  // TOGGLE OFFER
+  // =========================
+  const toggleOffer = async (item) => {
+    try {
+      await updateDoc(
+        doc(db, "products", item.id),
+        {
+          offer: !item.offer,
+        }
+      );
+
+      fetchProducts();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // =========================
   // UI
   // =========================
   return (
     <div
       style={{
         padding: "20px",
-        maxWidth: "1200px",
-        margin: "auto",
+        background: "#f5f5f5",
+        minHeight: "100vh",
       }}
     >
-      {/* ========================= */}
       {/* HEADER */}
-      {/* ========================= */}
-      <h1>Admin Dashboard</h1>
+      <h1
+        style={{
+          marginBottom: "30px",
+          fontSize: "40px",
+        }}
+      >
+        Admin Dashboard
+      </h1>
 
       {/* ========================= */}
       {/* FORM */}
       {/* ========================= */}
       <div
         style={{
-          border: "1px solid #ddd",
-          padding: "20px",
-          borderRadius: "10px",
-          marginBottom: "30px",
+          background: "#fff",
+          padding: "25px",
+          borderRadius: "15px",
+          marginBottom: "40px",
+          boxShadow:
+            "0 5px 20px rgba(0,0,0,0.08)",
         }}
       >
         <h2>
-          {editingId ? "Update Product" : "Add New Product"}
+          {editingId
+            ? "Update Product"
+            : "Add Product"}
         </h2>
 
         <input
@@ -212,7 +278,10 @@ function AdminDashboard() {
           placeholder="Product Name"
           value={form.name}
           onChange={(e) =>
-            setForm({ ...form, name: e.target.value })
+            setForm({
+              ...form,
+              name: e.target.value,
+            })
           }
           style={inputStyle}
         />
@@ -222,7 +291,10 @@ function AdminDashboard() {
           placeholder="Price"
           value={form.price}
           onChange={(e) =>
-            setForm({ ...form, price: e.target.value })
+            setForm({
+              ...form,
+              price: e.target.value,
+            })
           }
           style={inputStyle}
         />
@@ -232,7 +304,10 @@ function AdminDashboard() {
           placeholder="Phone Number"
           value={form.number}
           onChange={(e) =>
-            setForm({ ...form, number: e.target.value })
+            setForm({
+              ...form,
+              number: e.target.value,
+            })
           }
           style={inputStyle}
         />
@@ -243,7 +318,8 @@ function AdminDashboard() {
           onChange={(e) =>
             setForm({
               ...form,
-              description: e.target.value,
+              description:
+                e.target.value,
             })
           }
           style={{
@@ -252,44 +328,65 @@ function AdminDashboard() {
           }}
         />
 
-        {/* IMAGE INPUT */}
+        {/* IMAGE */}
         <input
           type="file"
-          onChange={(e) => uploadImage(e.target.files[0])}
-          style={{ marginBottom: "15px" }}
+          onChange={(e) =>
+            uploadImage(
+              e.target.files[0]
+            )
+          }
+          style={{
+            marginBottom: "20px",
+          }}
         />
 
         {/* LOADING */}
-        {loading && <p>Uploading image...</p>}
+        {loading && (
+          <p>Uploading image...</p>
+        )}
 
         {/* IMAGE PREVIEW */}
         {form.image && (
           <img
             src={form.image}
             alt="preview"
-            width="150"
             style={{
-              display: "block",
-              marginBottom: "15px",
+              width: "150px",
+              height: "150px",
+              objectFit: "cover",
               borderRadius: "10px",
+              marginBottom: "20px",
             }}
           />
         )}
 
         {/* BUTTON */}
-        <button
-          onClick={addProduct}
-          disabled={loading}
-          style={buttonStyle}
-        >
-          {editingId ? "Update Product" : "Add Product"}
-        </button>
+        <div>
+          <button
+            onClick={addProduct}
+            disabled={loading}
+            style={buttonStyle}
+          >
+            {editingId
+              ? "Update Product"
+              : "Add Product"}
+          </button>
+        </div>
       </div>
 
       {/* ========================= */}
       {/* PRODUCTS */}
       {/* ========================= */}
-      <h2>All Products</h2>
+
+      <h2
+        style={{
+          marginBottom: "20px",
+          fontSize: "32px",
+        }}
+      >
+        All Products
+      </h2>
 
       {products.length === 0 ? (
         <p>No products found</p>
@@ -298,7 +395,7 @@ function AdminDashboard() {
           style={{
             display: "grid",
             gridTemplateColumns:
-              "repeat(auto-fit, minmax(250px, 1fr))",
+              "repeat(4, 1fr)",
             gap: "20px",
           }}
         >
@@ -306,56 +403,166 @@ function AdminDashboard() {
             <div
               key={item.id}
               style={{
-                border: "1px solid #ddd",
-                borderRadius: "10px",
-                padding: "15px",
+                background: "#fff",
+                borderRadius: "15px",
+                overflow: "hidden",
+                boxShadow:
+                  "0 4px 15px rgba(0,0,0,0.1)",
+                position: "relative",
               }}
             >
+              {/* OFFER BADGE */}
+              {item.offer && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    left: "10px",
+                    background: "red",
+                    color: "#fff",
+                    padding: "5px 10px",
+                    borderRadius: "20px",
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    zIndex: 10,
+                  }}
+                >
+                  OFFER
+                </div>
+              )}
+
+              {/* SOLD BADGE */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "10px",
+                  right: "10px",
+                  background: item.sold
+                    ? "green"
+                    : "#222",
+                  color: "#fff",
+                  padding: "5px 10px",
+                  borderRadius: "20px",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  zIndex: 10,
+                }}
+              >
+                {item.sold
+                  ? "SOLD"
+                  : "AVAILABLE"}
+              </div>
+
+              {/* IMAGE */}
               <img
                 src={item.image}
                 alt={item.name}
                 style={{
                   width: "100%",
-                  height: "200px",
+                  height: "250px",
                   objectFit: "cover",
-                  borderRadius: "10px",
                 }}
               />
 
-              <h3>{item.name}</h3>
-
-              <p>
-                <strong>Ksh:</strong> {item.price}
-              </p>
-
-              <p>{item.description}</p>
-
+              {/* CONTENT */}
               <div
                 style={{
-                  display: "flex",
-                  gap: "10px",
-                  marginTop: "10px",
+                  padding: "15px",
                 }}
               >
-                <button
-                  onClick={() => startEdit(item)}
-                  style={{
-                    ...buttonStyle,
-                    background: "orange",
-                  }}
-                >
-                  Edit
-                </button>
+                <h3>{item.name}</h3>
 
-                <button
-                  onClick={() => deleteProduct(item.id)}
+                <p
                   style={{
-                    ...buttonStyle,
-                    background: "red",
+                    color: "#ff3c00",
+                    fontWeight: "bold",
+                    fontSize: "20px",
                   }}
                 >
-                  Delete
-                </button>
+                  Ksh {item.price}
+                </p>
+
+                <p
+                  style={{
+                    color: "#666",
+                    minHeight: "50px",
+                  }}
+                >
+                  {item.description}
+                </p>
+
+                {/* BUTTONS */}
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "10px",
+                    marginTop: "15px",
+                  }}
+                >
+                  {/* EDIT */}
+                  <button
+                    onClick={() =>
+                      startEdit(item)
+                    }
+                    style={{
+                      ...buttonStyle,
+                      background:
+                        "orange",
+                    }}
+                  >
+                    Edit
+                  </button>
+
+                  {/* DELETE */}
+                  <button
+                    onClick={() =>
+                      deleteProduct(
+                        item.id
+                      )
+                    }
+                    style={{
+                      ...buttonStyle,
+                      background: "red",
+                    }}
+                  >
+                    Delete
+                  </button>
+
+                  {/* SOLD */}
+                  <button
+                    onClick={() =>
+                      toggleSold(item)
+                    }
+                    style={{
+                      ...buttonStyle,
+                      background:
+                        item.sold
+                          ? "gray"
+                          : "green",
+                    }}
+                  >
+                    {item.sold
+                      ? "Available"
+                      : "Sold"}
+                  </button>
+
+                  {/* OFFER */}
+                  <button
+                    onClick={() =>
+                      toggleOffer(item)
+                    }
+                    style={{
+                      ...buttonStyle,
+                      background:
+                        "#ff3c00",
+                    }}
+                  >
+                    {item.offer
+                      ? "Remove Offer"
+                      : "Offer"}
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -368,21 +575,23 @@ function AdminDashboard() {
 // =========================
 // STYLES
 // =========================
+
 const inputStyle = {
   width: "100%",
-  padding: "12px",
+  padding: "14px",
   marginBottom: "15px",
-  borderRadius: "8px",
+  borderRadius: "10px",
   border: "1px solid #ccc",
+  fontSize: "16px",
 };
 
 const buttonStyle = {
-  padding: "12px 20px",
+  padding: "10px 15px",
   border: "none",
   borderRadius: "8px",
   cursor: "pointer",
-  background: "#000",
   color: "#fff",
+  fontWeight: "bold",
 };
 
 export default AdminDashboard;
