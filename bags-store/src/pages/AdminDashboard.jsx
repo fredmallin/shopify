@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 
 function AdminDashboard() {
-  // =========================
+  // ========================
   // STATES
   // =========================
   const [form, setForm] = useState({
