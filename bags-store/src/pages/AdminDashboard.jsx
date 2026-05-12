@@ -14,7 +14,7 @@ import axios from "axios";
 
 function AdminDashboard() {
   
-  // STATES
+  // STAT
   // =========================
   const [form, setForm] = useState({
     name: "",
