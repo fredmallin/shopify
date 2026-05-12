@@ -4,10 +4,24 @@ function Footer() {
   const navigate = useNavigate();
 
   return (
-    <footer style={{ textAlign: "center", padding: "20px", background: "#111", color: "#fff" }}>
-      <p onClick={() => navigate("/admin-login")} style={{ cursor: "pointer" }}>
-        @2026
-      </p>
+    <footer className="footer">
+      <div className="footer-bottom">
+        <p>
+          {/* HIDDEN ADMIN TRIGGER */}
+          <span
+            onClick={() => navigate("/admin/login")}
+            style={{
+              cursor: "pointer",
+              fontWeight: "bold",
+              marginRight: "6px",
+            }}
+          >
+            @
+          </span>
+
+          2026 South Tetu Girls High School. All rights reserved.
+        </p>
+      </div>
     </footer>
   );
 }
