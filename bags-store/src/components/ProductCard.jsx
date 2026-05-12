@@ -5,7 +5,7 @@ function ProductCard({ product }) {
 
   const orderNow = () => {
     window.open(
-      `https://wa.me/254700000000?text=Hi, I want to order ${product.name} No ${product.number} Price ${product.price}`,
+      `https://wa.me/254799052938?text=Hi, I want to order ${product.name} No ${product.number} Price ${product.price}`,
       "_blank"
     );
   };
