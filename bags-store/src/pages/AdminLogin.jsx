@@ -56,7 +56,7 @@ function AdminLogin() {
           />
         </div>
 
-        {/* RIGHT SIDE */}
+      
         <div className="login-right">
           <h2>Admin Login</h2>
 
