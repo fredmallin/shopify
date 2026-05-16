@@ -49,7 +49,7 @@ const CustomerLayout = ({ children }) => (
 
 const AppRoutes = () => (
   <Routes>
-    {/* Customer Routes */}
+  
     <Route path="/" element={<CustomerLayout><Home /></CustomerLayout>} />
     <Route path="/product/:id" element={<CustomerLayout><ProductDetails /></CustomerLayout>} />
     <Route path="/categories" element={<CustomerLayout><Categories /></CustomerLayout>} />
