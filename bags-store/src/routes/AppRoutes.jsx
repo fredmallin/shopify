@@ -56,7 +56,7 @@ const AppRoutes = () => (
     <Route path="/categories/:slug" element={<CustomerLayout><Categories /></CustomerLayout>} />
     <Route path="/search" element={<CustomerLayout><SearchResults /></CustomerLayout>} />
 
-    {/* Admin Auth */}
+  
     <Route path="/admin/login" element={<AdminLogin />} />
 
     {/* Admin Protected Routes */}
