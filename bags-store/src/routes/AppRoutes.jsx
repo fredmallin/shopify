@@ -29,7 +29,7 @@ const AdminLayout = ({ children }) => (
       <Sidebar />
       <div className="admin-content">
         <div className="admin-header">
-          <span className="admin-header__title">👜 LuxBag Admin Panel</span>
+          <span className="admin-header__title">LuxBag Admin Panel</span>
           <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>Store Management</span>
         </div>
         {children}
@@ -38,7 +38,6 @@ const AdminLayout = ({ children }) => (
   </ProtectedRoute>
 );
 
-// Customer layout wrapper
 const CustomerLayout = ({ children }) => (
   <>
     <Navbar />
