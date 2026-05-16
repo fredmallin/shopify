@@ -59,7 +59,7 @@ const AppRoutes = () => (
   
     <Route path="/admin/login" element={<AdminLogin />} />
 
-    {/* Admin Protected Routes */}
+  
     <Route path="/admin/dashboard" element={<AdminLayout><Dashboard /></AdminLayout>} />
     <Route path="/admin/products" element={<AdminLayout><ManageProducts /></AdminLayout>} />
     <Route path="/admin/add-product" element={<AdminLayout><AddProduct /></AdminLayout>} />
