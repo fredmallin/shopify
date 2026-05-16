@@ -23,7 +23,6 @@ import FloatingWhatsApp from "../components/FloatingWhatsApp";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Sidebar from "../components/admin/Sidebar";
 
-// Admin layout wrapper
 const AdminLayout = ({ children }) => (
   <ProtectedRoute>
     <div className="admin-layout">
