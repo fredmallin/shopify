@@ -67,7 +67,7 @@ const AppRoutes = () => (
     <Route path="/admin/settings" element={<AdminLayout><Settings /></AdminLayout>} />
     <Route path="/admin/change-password" element={<AdminLayout><ChangePassword /></AdminLayout>} />
 
-    {/* 404 */}
+  
     <Route path="*" element={<CustomerLayout><NotFound /></CustomerLayout>} />
   </Routes>
 );
