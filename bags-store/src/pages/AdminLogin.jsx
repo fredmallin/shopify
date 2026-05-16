@@ -41,7 +41,6 @@ function AdminLogin() {
   return (
     <div className="login-page">
       <div className="login-card">
-        {/* LEFT SIDE */}
         <div className="login-left">
           <h1>AutoXpress</h1>
 
