@@ -12,7 +12,6 @@ function Navbar() {
         Auto<span style={{ color: "#ff3c00" }}>Xpress</span>
       </div>
 
-      {/* ONLY HOME LINK */}
       <div style={styles.links}>
         <Link
           to="/"
