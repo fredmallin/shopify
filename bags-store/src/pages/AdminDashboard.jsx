@@ -52,7 +52,7 @@ function AdminDashboard() {
   };
 
   // CLOUDINARY IMAGE UPLOAD
-  
+
   const uploadImage = async (file) => {
     if (!file) return;
 
@@ -89,7 +89,6 @@ function AdminDashboard() {
     }
   };
 
-  // =========================
   // ADD OR UPDATE PRODUCT
   // =========================
   const addProduct = async () => {
