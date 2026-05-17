@@ -149,7 +149,6 @@ function AdminDashboard() {
     }
   };
 
-  // =========================
   // DELETE PRODUCT
   // =========================
   const deleteProduct = async (id) => {
