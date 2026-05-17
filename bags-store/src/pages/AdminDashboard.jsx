@@ -28,7 +28,7 @@ function AdminDashboard() {
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
-  // =========================
+
   // FETCH PRODUCTS
   // =========================
   useEffect(() => {
