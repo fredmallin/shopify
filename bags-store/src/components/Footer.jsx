@@ -7,7 +7,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-bottom">
         <p>
-          {/* HIDDEN ADMIN
+          {/* HIDDEN 
           <span
             onClick={() => navigate("/admin/login")}
             style={{
