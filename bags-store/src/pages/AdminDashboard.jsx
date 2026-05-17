@@ -90,7 +90,7 @@ function AdminDashboard() {
   };
 
   // ADD OR UPDATE PRODUCT
-  // =========================
+
   const addProduct = async () => {
     if (
       !form.name ||
