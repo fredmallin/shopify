@@ -173,7 +173,7 @@ function AdminDashboard() {
   };
 
   // EDIT PRODUCT
-  // =========================
+
   const startEdit = (product) => {
     setForm({
       name: product.name || "",
