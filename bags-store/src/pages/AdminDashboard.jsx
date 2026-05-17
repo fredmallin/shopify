@@ -29,7 +29,7 @@ function AdminDashboard() {
   const [editingId, setEditingId] = useState(null);
 
   // FETCH PRODUCTS
-  
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -51,7 +51,6 @@ function AdminDashboard() {
     }
   };
 
-  // =========================
   // CLOUDINARY IMAGE UPLOAD
   // =========================
   const uploadImage = async (file) => {
