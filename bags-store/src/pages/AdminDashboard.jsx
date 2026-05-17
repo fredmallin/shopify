@@ -150,7 +150,7 @@ function AdminDashboard() {
   };
 
   // DELETE PRODUCT
-  // =========================
+  
   const deleteProduct = async (id) => {
     const confirmDelete =
       window.confirm(
