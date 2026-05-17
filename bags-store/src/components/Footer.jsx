@@ -7,7 +7,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-bottom">
         <p>
-          {/* HIDDEN ADMIN TRIGGER
+          {/* HIDDEN ADMIN
           <span
             onClick={() => navigate("/admin/login")}
             style={{
