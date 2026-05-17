@@ -194,7 +194,7 @@ function AdminDashboard() {
 
 
   // TOGGLE SOLD
-  // =========================
+
   const toggleSold = async (item) => {
     try {
       await updateDoc(
