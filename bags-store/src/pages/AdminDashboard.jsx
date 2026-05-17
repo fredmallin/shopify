@@ -172,7 +172,6 @@ function AdminDashboard() {
     }
   };
 
-  // =========================
   // EDIT PRODUCT
   // =========================
   const startEdit = (product) => {
