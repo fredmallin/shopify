@@ -7,7 +7,6 @@ function Navbar() {
 
   return (
     <nav style={styles.navbar}>
-      {/* LOGO */}
       <div style={styles.logo}>
         Auto<span style={{ color: "#ff3c00" }}>Xpress</span>
       </div>
