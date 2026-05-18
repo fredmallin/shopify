@@ -22,7 +22,7 @@ function App() {
           </Routes>
         </div>
 
-        {/* ✅ FOOTER NOW ALWA
+        {/* ✅ FOOTER NOW AL
         <Footer />
 
       </div>
