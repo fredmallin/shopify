@@ -22,7 +22,7 @@ function App() {
           </Routes>
         </div>
 
-        {/* ✅ FOO
+        {/* ✅ F
         <Footer />
 
       </div>
