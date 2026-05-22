@@ -11,8 +11,6 @@ body {
   color: #111;
 }
 
-===
-
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
